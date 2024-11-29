@@ -80,7 +80,7 @@ uma ferramenta que facilita a **anotação de dados**
 
 <video width="100%" controls>
   <source src="https://zenodo.org/records/10703030/files/COMO%20INSTALAR%20O%20ATLAS%20NO%20WINDOWS.mp4?preview=0" type="video/mp4">
-  Your browser does not support HTML video.
+  Your browser does not support HTML video. Try another browser.
 </video>
 
 ## {background-image="figs/bye.gif" background-size="cover"}
