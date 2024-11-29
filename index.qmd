@@ -79,7 +79,7 @@ uma ferramenta que facilita a **anotação de dados**
 ## Colocando a mão na massa {transition="zoom"}
 
 <video width="100%" controls>
-  <source src="src/COMO INSTALAR O ATLAS NO WINDOWS.mp4" type="video/mp4">
+  <source src="https://zenodo.org/records/10703030/files/COMO%20INSTALAR%20O%20ATLAS%20NO%20WINDOWS.mp4?preview=0" type="video/mp4">
   Your browser does not support HTML video.
 </video>
 
