@@ -1,0 +1,163 @@
+---
+title: "Web Scraping no R"
+author: "Ariana Moura Cabral"
+format:
+  revealjs:
+    transition: slide
+    transition-speed: fast
+    lang: pt-br
+    chalkboard: true
+    preview-links: auto
+    slide-number: true
+    show-slide-number: all 
+    theme: [serif, custom.scss] #blood #custom.scss
+    footer: "Ciência de Dados Aplicada à Engenharia Biomédica | PPGEB | UFU <br/> 2024"
+---
+
+
+## O que é o Web Scraping? {background-image="figs/webscraping00.gif" background-size="cover"}
+
+
+## Vamos colocar a mão na massa?
+
+![](figs/r_welcome.png){fig-align="center" width="75%"}
+
+## Página da Wikipédia
+
+::: {.callout-exercise icon="false"}
+## Exemplo 1
+
+Neste exemplo, vamos fazer um ***web scraping*** na página da [Wikipédia](https://pt.wikipedia.org/wiki/Lista_de_municípios_de_Minas_Gerais), que é uma página estática, para obter os nomes e códigos do **IBGE** dos municípios de **MG**.
+
+[![](figs/wikipedia_mun_mg.png){fig-align="center" width="75%"}](https://pt.wikipedia.org/wiki/Lista_de_municípios_de_Minas_Gerais)
+
+:::
+
+## 
+
+<br>
+
+```{r echo=TRUE}
+# URL da página da Wikipedia sobre Municípios de MG
+url <- "https://pt.wikipedia.org/wiki/Lista_de_municípios_de_Minas_Gerais"
+
+# obtendo todas as tabelas desta webpage
+xml2::read_html(url) |>
+  xml2::xml_find_all("//table")
+```
+
+##
+
+![](figs/wikipedia_mun_mg_inspection.gif){fig-align="center" width="75%"}
+
+
+##
+
+```{r echo=TRUE}
+
+# obtendo a tabela com a lista de municípios de MG
+mun_mg <- xml2::read_html(url) |>
+  xml2::xml_find_first("//table [@class='wikitable sortable']")
+
+# organizando os dados da tabela HTML obtida para `data.frame()`
+mun_mg <- mun_mg |>
+  rvest::html_table()
+
+# apresentando, de forma tabular, algumas observações
+mun_mg |>
+  dplyr::select(1:3) |>
+  head(n = 4L) |>
+  knitr::kable(align = "c")
+```
+
+## Página da PhysioNet 
+
+::: {.callout-exercise icon="false"}
+## Exemplo 2
+
+Neste exemplo, vamos fazer um ***web scraping*** na página da [Physionet](https://www.physionet.org/), que é um repositório de bases de dados abertas e fechadas, para obter os arquivos disponíveis da base de dados **MIT-BIH Arrhythmia**.
+
+[![](figs/mit_bih.png){fig-align="center" width="70%"}](https://www.physionet.org/content/mitdb/1.0.0/)
+
+:::
+
+##
+
+```{r echo=TRUE}
+# URL da página da PhysioNet: MIT-BIH Arrhythmia Database
+url <- "https://www.physionet.org/files/mitdb/1.0.0/"
+
+# fazendo a requisição HTTP
+response <- httr::GET(url)
+
+# verificando se a requisição foi bem-sucedida
+if (httr::status_code(response) == 200) {
+  
+  # obtendo o conteúdo HTML da página
+  html <- httr::content(response, as = "text")
+
+  # lendo a página HTML
+  soup <- rvest::read_html(html)
+
+  # encontrando todos os links listados na página
+  links <- soup |>
+    rvest::html_nodes("a") |>
+    rvest::html_attr("href")
+
+  # obtendo os links apenas com os formatos de arquivos de interesse
+  links <- na.omit(links[stringr::str_detect(links, "\\.(dat|atr|hea|xws)$")])
+
+  for (href in links) {
+    
+    # informando no console o arquivo
+    message(glue::glue("Fazendo o download: {href}"))
+
+    # construindo a URL completa
+    remote_file_url <- paste0(url, href, "?download")
+    remote_file <- httr::GET(remote_file_url)
+
+    # salvando o arquivo localmente
+    if (httr::status_code(remote_file) == 200) {
+      writeBin(httr::content(remote_file, "raw"), paste0("../data/physionet/", href))
+    } else {
+      message(glue::glue("Falha no download: {remote_file_url}"))
+    }
+  }
+}
+```
+
+##
+
+```{python echo=TRUE}
+import wfdb as wf
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# definindo o nome do arquivo
+filename = '../data/physionet/200'
+
+# lendo os arquivos
+record = wf.rdsamp(filename)
+annotation = wf.rdann(filename, 'atr')
+
+# visualizando as informações 
+record[1]
+
+# transformando para data frame
+df = pd.DataFrame(record[0], columns = record[1]['sig_name'])
+
+
+```
+
+##
+
+```{python echo=TRUE, fig.align='center'}
+# visualizando os sinais
+plt.figure(figsize=(16, 8))
+plt.plot(df)
+plt.grid(True)
+plt.show()
+```
+
+## {background-image="figs/bye.gif" background-size="cover"}

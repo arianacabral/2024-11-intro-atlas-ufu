@@ -1,0 +1,87 @@
+---
+title: "ATLAS"
+subtitle: "Visualização e Compreensão de Sinais Biomédicos"
+format:
+  revealjs:
+    transition: slide
+    transition-speed: fast
+    lang: pt-br
+    chalkboard: true
+    preview-links: auto
+    slide-number: true
+    show-slide-number: all 
+    theme: [serif, custom.scss] #blood #custom.scss
+    footer: "Núcleo de Inovação e Avaliação Tecnológica em Saúde | UFU <br/> 2024"
+---
+
+# Parte 1
+
+**29/11/2024**
+
+## O que é o ATLAS? {background-image="figs/demo_atlas.png" background-size="cover" background-opacity="0.2" auto-animate="true"}
+
+<br>
+
+::: {style="margin-top:25px; font-size: 2em; color:black; text-align: center;"}
+uma ferramenta que facilita **a visualização sincronizada de diferentes tipos de dados** 
+:::
+
+## O que é o ATLAS? {background-image="figs/demo_atlas.png" background-size="cover" background-opacity="0.2" auto-animate="true"}
+
+::: {style="margin-top:25px; font-size: 1.75em; color:black; text-align: center;"}
+uma ferramenta que facilita **a visualização sincronizada de diferentes tipos de dados** 
+:::
+
+::: {style="margin-top:25px; font-size: 1.75em; color:black; text-align: center;"}
+uma ferramenta que facilita a **anotação de dados**
+:::
+
+## CheatSheet do ATLAS
+
+::: borderbox
+[![](figs/cheatsheet_atlas.png){fig-align="center" width="85%" fig-alt="CheatSheet do ATLAS"}](https://doi.org/10.5281/zenodo.10703030)
+:::
+
+## Instalação {background-color="#c5818e"}
+
+::: columns
+
+::: {.column width="50%"}
+
+<br>
+
+**Dependências**
+
+::: borderbox
+[![](figs/vlc.png){width="50%" fig-alt="VLC media player"}](https://www.videolan.org/vlc/index.pt_BR.html)
+:::
+
+::: borderbox
+[![](figs/java.png){width="50%" fig-alt="VLC media player"}](https://www.java.com/pt-BR/download/windows_manual.jsp)
+:::
+
+:::
+
+::: {.column width="50%"}
+
+<br>
+
+**ATLAS**
+
+::: borderbox
+[![](figs/atlas.png){width="80%" fig-alt="VLC media player"}](https://www.uni-ulm.de/in/neuroinformatik/institut/hidden/s-meudt/)
+:::
+
+:::
+
+:::
+
+## Colocando a mão na massa {transition="zoom"}
+
+<video width="100%" controls>
+  <source src="src/COMO INSTALAR O ATLAS NO WINDOWS.mp4" type="video/mp4">
+  Your browser does not support HTML video.
+</video>
+
+
+## {background-image="figs/bye.gif" background-size="cover"}
