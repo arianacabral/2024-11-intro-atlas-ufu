@@ -83,5 +83,4 @@ uma ferramenta que facilita a **anotação de dados**
   Your browser does not support HTML video.
 </video>
 
-
 ## {background-image="figs/bye.gif" background-size="cover"}
